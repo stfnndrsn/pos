@@ -32,8 +32,8 @@
                         type="action" icon="fa-level-down"
                         attrs="{'invisible':['|',('state', 'not in', ['opened', 'closing_control']), ('statement_ids', '=', False)]}">
                     <div class="o_form_field o_stat_info">
-                        <span class="o_stat_text">Receive</span>
-                        <span class="o_stat_text">Invoice</span>
+                        <span class="o_stat_text">Collect Payment</span>
+                        <span class="o_stat_text">from Invoice</span>
                     </div>
                 </button>
 

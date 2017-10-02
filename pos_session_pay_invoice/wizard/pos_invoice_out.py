@@ -29,6 +29,16 @@ class PosInvoiceOut(models.TransientModel):
                 return self.env['account.journal'].browse(
                     [r.journal_id.id for r in active.statement_ids])
 
+    def default_currency(self):
+        active_model = self.env.context.get('active_model', False)
+        if active_model:
+            active_ids = self.env.context.get('active_ids', False)
+            active = self.env[active_model].browse(active_ids)
+            if active_model == 'pos.session':
+                return active[0].config_id.company_id.currency_id
+            return active[0].company_id.currency_id
+        return None
+
     def default_journal(self):
         journals = self.default_journals()
         if journals:
@@ -59,6 +69,13 @@ class PosInvoiceOut(models.TransientModel):
         required=True,
         default=default_journal
     )
+    currency_id = fields.Many2one('res.currency', default=default_currency,
+                                  required=True, readonly=True)
+
+    @api.onchange('journal_id')
+    def _onchange_journal(self):
+        self.currency_id = self.journal_id.currency_id or \
+                self.journal_id.company_id.currency_id
 
     @api.onchange('invoice_id')
     def _onchange_invoice(self):

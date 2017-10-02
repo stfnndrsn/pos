@@ -5,7 +5,7 @@
         <field name="model">pos.invoice.out</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Register customer payment">
+            <form string="Collect payment from customer invoice or supplier refund">
                 <group>
                     <field name="company_id" invisible="1"/>
                     <field name="journal_ids" invisible="1"/>
@@ -18,10 +18,14 @@
                            class="oe_inline"
                            domain="[('company_id', '=', company_id),
                            ('state', '=', 'open'),
+                           ('currency_id', '=', currency_id),
                            ('type', 'in', ['out_invoice', 'in_refund'])]"
                            options="{'no_create': True, 'no_open':True}"
                     />
-                    <field name="amount" class="oe_inline"/>
+                    <label for="amount"/>
+                    <div>
+                        <field name="amount" class="oe_inline"/><field name="currency_id" class="oe_inline" groups="base.group_multi_currency"/>
+                    </div>
                 </group>
                 <footer>
                     <button name="run" string="Register" type="object" class="btn-primary"/>

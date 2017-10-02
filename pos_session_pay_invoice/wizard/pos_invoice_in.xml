@@ -5,17 +5,21 @@
         <field name="model">pos.invoice.in</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Pay provider invoice">
+            <form string="Pay supplier invoice or customer refund">
                 <group>
                     <field name="company_id" invisible="1"/>
                     <field name="invoice_id"
                            class="oe_inline"
                            domain="[('company_id', '=', company_id),
                            ('state', '=', 'open'),
+                           ('currency_id', '=', currency_id),
                            ('type', 'in', ['in_invoice', 'out_refund'])]"
                            options="{'no_create': True, 'no_open':True}"
                     />
-                    <field name="amount" class="oe_inline"/>
+                    <label for="amount"/>
+                    <div>
+                        <field name="amount" class="oe_inline"/><field name="currency_id" class="oe_inline" groups="base.group_multi_currency"/>
+                    </div>
                 </group>
                 <footer>
                     <button name="run" string="Pay invoice" type="object" class="btn-primary"/>

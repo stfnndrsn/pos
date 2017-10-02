@@ -19,6 +19,17 @@ class PosInvoiceIn(models.TransientModel):
             return active[0].company_id
         return None
 
+    def default_currency(self):
+        active_model = self.env.context.get('active_model', False)
+        if active_model:
+            active_ids = self.env.context.get('active_ids', False)
+            active = self.env[active_model].browse(active_ids)
+            if active_model == 'pos.session':
+                return active[0].cash_register_id.currency_id or \
+                        self.company_id.currency_id
+            return active[0].company_id.currency_id
+        return None
+
     invoice_id = fields.Many2one(
         'account.invoice',
         string='Invoice',
@@ -33,6 +44,8 @@ class PosInvoiceIn(models.TransientModel):
         required=True,
         readonly=True
     )
+    currency_id = fields.Many2one('res.currency', default=default_currency,
+                                  required=True, readonly=True)
 
     @api.onchange('invoice_id')
     def _onchange_invoice(self):

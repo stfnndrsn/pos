@@ -18,5 +18,6 @@
         "wizard/pos_invoice_out.xml",
         "wizard/pos_invoice_in.xml",
         "views/pos_session.xml",
+        "views/pos_box.xml",
     ],
 }
