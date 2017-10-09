@@ -4,7 +4,7 @@
 
 {
     'name': 'Account cash invoice',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Account',
     'author': "Creu Blanca,"
               "Odoo Community Association (OCA)",
@@ -12,7 +12,7 @@
     'summary': 'Pay and receive invoices from bank statements',
     "license": "LGPL-3",
     'depends': [
-        "account",
+        "account_invoicing",
     ],
     'data': [
         "wizard/cash_invoice_out.xml",
