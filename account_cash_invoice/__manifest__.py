@@ -18,7 +18,4 @@
         "wizard/cash_invoice_out.xml",
         "wizard/cash_invoice_in.xml",
     ],
-    'external_dependencies': {
-        'python' : ['usb.core','serial','qrcode'],
-    },
 }
