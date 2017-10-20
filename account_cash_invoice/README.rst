@@ -24,6 +24,7 @@ Usage
 #.  Press **Validate** on the statement. The payment will then be reconciled
     with the invoice.
 
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/repo/github-com-oca-pos-184
